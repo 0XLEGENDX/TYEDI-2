@@ -1,0 +1,54 @@
+from collections import deque
+
+# Graph represented as an adjacency list
+graph = {
+    'S': [('A', 10), ('B', 9)],
+    'A': [('S', 10), ('D', 10)],
+    'B': [('S', 9), ('D', 3)],
+    'D': [('A', 10), ('B', 3), ('H', 2), ('I', 15)],
+    'H': [('D', 2), ('K', 7), ('G', 9)],
+    'I': [('D', 15), ('G', 3)],
+    'K': [('H', 7), ('G', 8)],
+    'G': [('H', 9), ('I', 3), ('K', 8)]
+}
+
+def heuristic(node):
+    # Heuristic function (returns 0 for the goal node 'G')
+    if node == 'G':
+        return 0
+    else:
+        return 1  # Any non-zero value for non-goal nodes
+
+def a_star_search(start, goal):
+    frontier = deque([(0, start, [start])])  # (cost, node, path)
+    explored = set()
+
+    while frontier:
+        cost, current, path = frontier.popleft()
+
+        if current == goal:
+            return path, cost
+
+        explored.add(current)
+
+        for neighbor, weight in graph[current]:
+            new_cost = cost + weight
+            new_path = path + [neighbor]
+
+            if neighbor not in explored:
+                # Break ties lexicographically
+                frontier.append((new_cost, neighbor, new_path))
+                frontier = deque(sorted(frontier))
+
+    return None, None
+
+# Call the function to find the optimal path
+start_node = 'S'
+goal_node = 'G'
+optimal_path, optimal_cost = a_star_search(start_node, goal_node)
+
+if optimal_path:
+    print(f"Optimal path: {' -> '.join(optimal_path)}")
+    print(f"Total cost: {optimal_cost}")
+else:
+    print("No path found")

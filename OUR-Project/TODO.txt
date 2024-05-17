@@ -2,6 +2,5 @@ Extra To Add
 
 1) Height
 2) Species
-3) Optimal Path Point Selection
-4) Obstacles Detection / Infrastructure Detection
+4) Obstacles Detection / Infrastructure Detection - UNET ()
 

@@ -1,0 +1,28 @@
+#image-container {
+    border: 1px solid black;
+    width: 500px;
+    height: 500px;
+    position: relative;
+  }
+  
+  #image-container img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  #point-1, #point-2 {
+    position: absolute;
+    background-color: red;
+    width: 10px;
+    height: 10px;
+  }
+  
+  #point-1 {
+    left: 0;
+    top: 0;
+  }
+  
+  #point-2 {
+    right: 0;
+    bottom: 0;
+  }

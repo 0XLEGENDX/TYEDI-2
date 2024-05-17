@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload Image and Select Points</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='src/assets/css/optimalpath.css') }}" />
+  </head>
+  <body>
+    <form id="image-form">
+      <input type="file" id="image-input" accept="image/*" />
+      <button type="button" id="submit-button">Submit</button>
+    </form>
+    <div id="image-container"></div>
+    <script src="{{ url_for('static', filename='src/assets/js/optimalpath.js') }}"></script>
+  </body>
+</html>
