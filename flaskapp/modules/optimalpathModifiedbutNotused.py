@@ -4,22 +4,26 @@ from skimage import io
 import cv2
 import heapq
 import math
-import os
+
 
 import numpy as np
 import matplotlib.pyplot as plt 
 from skimage import io
 import cv2
+import modules.uploadFile as uploader 
+from io import BytesIO as bio
+
+
 class ImageSeg:
      #Initializing the path of image and threshold value by taking as class parameters
     def __init__(self,path):
         self.path = path
         self.img = plt.imread(path)
-        self.threshold = 0  
+        self.threshold = 0
     #Visualize the raw rgb image 
     def visualize_rgb(self):
         rgb_img = self.img
-        # plt.imshow(rgb_img)
+        plt.imshow(rgb_img)
     
     #Nullify the R and B values in the image matrix 
     def RGNull(self):
@@ -52,7 +56,7 @@ class ImageSeg:
                 else:
                     gray_img[i][j]=0
                     
-        # plt.imshow(gray_img)
+        plt.imshow(gray_img)
         return gray_img
     
     #Comparison b/w raw rgb, grayscaled and thresholded images
@@ -61,11 +65,11 @@ class ImageSeg:
         row = 1 
         cols = 3 
         fig.add_subplot(row,cols,1)
-        # io.imshow(self.img)
+        io.imshow(self.img)
         fig.add_subplot(row,cols,2)
-        # io.imshow(self.IsoGray())
+        io.imshow(self.IsoGray())
         fig.add_subplot(row,cols,3)
-        # io.imshow(self.IsoGrayThresh())
+        io.imshow(self.IsoGrayThresh())
         
     #Function to count the tree pixels in the thresholded image 
     def PixelCount(self):
@@ -79,10 +83,11 @@ class ImageSeg:
         return count
 
 
+
 class OptimalPathing:
-    def __init__(self,img,PATH):
+    def __init__(self,img):
         self.img = img
-        self.PATH = PATH
+        # self.PATH = PATH
         
     def Precompute_EuclideanDist(self,img):
         rows,cols = len(img),len(img[0])
@@ -150,7 +155,7 @@ class OptimalPathing:
     
 
     
-    def ComputeDjikstra(self,start_pixel = (0,0),target_pixel =(800,1400)):
+    def ComputeDjikstra(self,start_pixel = (0,0),target_pixel =(100,100)):
         graph = self.create_graph(self.img,target_pixel)
         # Find the shortest path
         parents = {}
@@ -176,6 +181,7 @@ class OptimalPathing:
         shortest_path = self.trace_path(parents, start_pixel, target_pixel)
 
 # Visualize the image and the shortest path
+        buf = bio()
         plt.figure(figsize=[20,14])
         image = np.array(self.img)
         x_coords, y_coords = zip(*shortest_path)   # Extract x, y coordinates for plotting
@@ -184,30 +190,24 @@ class OptimalPathing:
         plt.imshow(image, cmap='gray')
         plt.plot(y_coords, x_coords, color='blue', linewidth=2)  # Plot the path in blue
         fig.add_subplot(2,1,2)
-        plt.imshow(plt.imread(self.PATH))
+        # plt.imshow(plt.imread(self.PATH))
         plt.plot(y_coords, x_coords, color='red', linewidth=2) 
-        output_dir = r'D:\Projects\EDI TY SEM 2\TYEDI-2\flaskapp\static\uploads'
-        os.makedirs(output_dir, exist_ok=True)
-        plt.savefig("output.png")
-        return
+        # plt.show()   # Show the image with the path
+        plt.savefig(buf, format='jpeg')
+        buf.seek(0)
+
+        print("Started")
+        return uploader.upload(buf)
 
 
-def computeValue(x1,x2,y1,y2):
+        
+    
+def findOptimalPath(img,startpoint,endpoint):
     PATH = r"D:\Projects\EDI TY SEM 2\TYEDI-2\flaskapp\static\uploads\imageUploaded.jpeg"
-    # settingPath = r"D:\Projects\EDI TY SEM 2\TYEDI-2\flaskapp\static\uploads\settings.txt"
-    
-    # f = open(settingPath,"r")
-    # data = f.read()
-    # data = data.split()
-    # x1,y1,x2,y2 = data
-    obj = ImageSeg(PATH)
+    obj = ImageSeg(img)
     img = obj.IsoGrayThresh()
-    obj = OptimalPathing(img,PATH)
-    obj.ComputeDjikstra((int(x1),int(y1)) , (int(x2) , int(y2)))
-    return 
-
-
-# print(computeValue())
+    #Add startpoint (x,y) and endpoint (x,y)
+    obj = OptimalPathing(PATH)
+    return obj.ComputeDjikstra()
     
-
-
+    

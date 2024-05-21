@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Upload Image and Select Points</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='src/assets/css/optimalpath.css') }}" />
-  </head>
-  <body>
-    <form id="image-form">
-      <input type="file" id="image-input" accept="image/*" />
-      <button type="button" id="submit-button">Submit</button>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload Form</title>
+</head>
+<body>
+    <h2>Upload an Image</h2>
+    <form action="/optimalpath" method="post" enctype="multipart/form-data">
+        <label for="image">Select an image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <br><br>
+        <input type="text" id="X1" name="X1" required placeholder="StartPointX">
+        <input type="text" id="Y1" name="Y1" required placeholder="StartPointY">
+        <input type="text" id="X2" name="X2" required placeholder="EndPointX">
+        <input type="text" id="Y2" name="Y2" required placeholder="EndPointY">
+        <br><br>
+        <button type="submit">Submit</button>
     </form>
-    <div id="image-container"></div>
-    <script src="{{ url_for('static', filename='src/assets/js/optimalpath.js') }}"></script>
-  </body>
+</body>
 </html>
