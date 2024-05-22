@@ -106,11 +106,11 @@ def process_image(image_path, h , w):
     color = (0, 255, 0)
     thickness = 2
 
-    binary_image = cv2.rectangle(binary_image, cords, endcords , color, thickness)
+    binary_image = cv2.rectangle(image, cords, endcords , color, thickness)
 
 
     processed_image_path = 'processed_image.png'
     cv2.imwrite(processed_image_path, binary_image)
     print(f"Processed image saved as {processed_image_path}")
 
-process_image(r"D:\Projects\EDI TY SEM 2\TYEDI-2\flaskapp\optimaltest.png" , 300, 300)
+# process_image(r"D:\Projects\EDI TY SEM 2\TYEDI-2\flaskapp\optimaltest.png" , 300, 300)

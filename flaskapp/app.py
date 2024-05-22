@@ -61,24 +61,23 @@ def optimalPathPage():
     return render_template("optimalpath.html")
 
 @app.route('/optimalsite', methods=['POST'])
-def optimalpath():
-
+def optimalsite():
 
     if 'image' not in request.files:
         return 'No file part'
     file = request.files['image']
-    height = request.form["height"]
-    width = request.form["width"]
+    height = int(request.form["height"])
+    width = int(request.form["width"])
     filename = "imageUploadedsite.jpeg"
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    osite.process_image()
-    path = 
-    return send_file()
+    osite.process_image(r"D:\Projects\EDI TY SEM 2\TYEDI-2\flaskapp\static\uploads\imageUploadedsite.jpeg",height,width)
+    path = r"D:\Projects\EDI TY SEM 2\TYEDI-2\flaskapp\processed_image.png"
+    return send_file(path)
 
 
 
 @app.route('/optimalsite')
-def optimalPathPage():
+def optimalsitepage():
     return render_template("optimalsite.html")
 
 @app.route('/home')
