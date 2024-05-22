@@ -54,7 +54,7 @@ class ImageSeg:
                     
         # plt.imshow(gray_img)
         return gray_img
-    
+     
     #Comparison b/w raw rgb, grayscaled and thresholded images
     def visualize_compare(self):
         fig = plt.figure(figsize=(14, 30))

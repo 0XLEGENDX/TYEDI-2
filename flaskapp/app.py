@@ -68,6 +68,11 @@ def download_file():
     file_path = r'static\model\model.onnx'
     return send_file(file_path, as_attachment=True)
 
+@app.route('/historydata')
+def historydata():
+
+    return render_template("historicaldata.html")
+
 
 
 if __name__ == '__main__':

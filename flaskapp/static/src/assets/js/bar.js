@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", function() {
     var bar = document.getElementById("mybarChart");
     
@@ -14,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     '2022': 4.7
     
 };
+
 const ctx = document.getElementById('mybarChart').getContext('2d');
 const myChart = new Chart(ctx, {
     type: 'bar',
