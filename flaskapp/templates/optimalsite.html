@@ -7,14 +7,12 @@
 </head>
 <body>
     <h2>Upload an Image</h2>
-    <form action="/optimalpath" method="post" enctype="multipart/form-data">
+    <form action="/optimalsite" method="post" enctype="multipart/form-data">
         <label for="image">Select an image:</label>
         <input type="file" id="image" name="image" accept="image/*" required>
         <br><br>
-        <input type="text" id="X1" name="X1" required placeholder="StartPointX">
-        <input type="text" id="Y1" name="Y1" required placeholder="StartPointY">
-        <input type="text" id="X2" name="X2" required placeholder="EndPointX">
-        <input type="text" id="Y2" name="Y2" required placeholder="EndPointY">
+        <input type="text" id="height" name="height" required placeholder="Height">
+        <input type="text" id="width" name="width" required placeholder="Width">
         <br><br>
         <button type="submit">Submit</button>
     </form>

@@ -114,6 +114,7 @@ function processImage() {
         imageData.data[i + 1] = gray; // Green channel
         imageData.data[i + 2] = gray; // Blue channel
         imageData.data[i + 3] = 255;  // Alpha channel
+
       }
 
       ctx.putImageData(imageData, 0, 0);
@@ -122,6 +123,7 @@ function processImage() {
       processedImage.src = canvas.toDataURL();
       greenCoverPercentage.textContent = ((blackPixelCount / (canvas.width * canvas.height)) * 100).toFixed(2) + '%';
       idleLandPercentage.textContent = (100 - ((blackPixelCount / (canvas.width * canvas.height)) * 100)).toFixed(2) + '%';
+      
     };
     img.src = reader.result;
 

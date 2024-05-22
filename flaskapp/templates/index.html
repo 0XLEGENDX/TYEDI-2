@@ -56,6 +56,7 @@ iframe {
             <button id="segmentation-button">Green Cover</button>
             <button id="species-button">Survey</button>
             <button id="path-button">Optimal Pathing</button>
+            <button id="best-site">Optimal Project Area</button>
             <button id="historical-button">Historical Data</button>
         </div>
     </header>
@@ -65,6 +66,7 @@ const segmentationButton = document.getElementById('segmentation-button');
 const speciesButton = document.getElementById('species-button');
 const pathButton = document.getElementById('path-button');
 const historicalButton = document.getElementById('historical-button');
+const bestsite = document.getElementById('best-site');
 const modelIframe = document.getElementById('model-iframe');
 
 detectionButton.addEventListener('click', () => {
@@ -85,6 +87,10 @@ pathButton.addEventListener('click', () => {
 
 historicalButton.addEventListener('click', () => {
     window.location.href = "/historydata";
+});
+
+bestsite.addEventListener('click', () => {
+    window.location.href = "/optimalsite";
 });
 
     </script>

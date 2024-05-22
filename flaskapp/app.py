@@ -1,6 +1,7 @@
 from flask import Flask, render_template, send_file, request
 import os 
 import modules.optimalpath as op
+import modules.optimalsite as osite
 
 
 
@@ -58,6 +59,27 @@ def optimalpath():
 @app.route('/optimalpath')
 def optimalPathPage():
     return render_template("optimalpath.html")
+
+@app.route('/optimalsite', methods=['POST'])
+def optimalpath():
+
+
+    if 'image' not in request.files:
+        return 'No file part'
+    file = request.files['image']
+    height = request.form["height"]
+    width = request.form["width"]
+    filename = "imageUploadedsite.jpeg"
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    osite.process_image()
+    path = 
+    return send_file()
+
+
+
+@app.route('/optimalsite')
+def optimalPathPage():
+    return render_template("optimalsite.html")
 
 @app.route('/home')
 def home():
