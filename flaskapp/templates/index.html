@@ -57,6 +57,7 @@ iframe {
             <button id="species-button">Survey</button>
             <button id="path-button">Optimal Pathing</button>
             <button id="best-site">Optimal Project Area</button>
+            <button id="treeheight">Tree Height</button>
             <button id="historical-button">Historical Data</button>
         </div>
     </header>
@@ -67,6 +68,7 @@ const speciesButton = document.getElementById('species-button');
 const pathButton = document.getElementById('path-button');
 const historicalButton = document.getElementById('historical-button');
 const bestsite = document.getElementById('best-site');
+const treeheight = document.getElementById('treeheight');
 const modelIframe = document.getElementById('model-iframe');
 
 detectionButton.addEventListener('click', () => {
@@ -91,6 +93,12 @@ historicalButton.addEventListener('click', () => {
 
 bestsite.addEventListener('click', () => {
     window.location.href = "/optimalsite";
+});
+
+treeheight.addEventListener('click',()=>{
+
+    window.location.href = "/treeheight";
+    
 });
 
     </script>

@@ -10,6 +10,8 @@ import numpy as np
 import matplotlib.pyplot as plt 
 from skimage import io
 import cv2
+
+
 class ImageSeg:
      #Initializing the path of image and threshold value by taking as class parameters
     def __init__(self,path):
@@ -29,10 +31,10 @@ class ImageSeg:
         for i in range(len(arr)):
             for j in range(len(arr[i])):
                 count+=1
-                greenval+=arr[i][j][1]
-                arr[i][j][0]=0
+                greenval+=arr[i][j][0]
+                arr[i][j][1]=0
                 arr[i][j][2]=0
-        self.threshold = (greenval/count)/1.5
+        self.threshold = (greenval/count)/2
         return arr
         
     #Grayscale the image
@@ -73,7 +75,7 @@ class ImageSeg:
         arr = self.IsoGrayThresh()
         for i in arr:
             for j in i:
-                if j!=0:
+                if j==0:
                     count+=1
                     
         return count

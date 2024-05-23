@@ -2,7 +2,7 @@ from flask import Flask, render_template, send_file, request
 import os 
 import modules.optimalpath as op
 import modules.optimalsite as osite
-
+import modules.stereo_depth_estimate as sde
 
 
 app = Flask(__name__)
@@ -60,6 +60,7 @@ def optimalpath():
 def optimalPathPage():
     return render_template("optimalpath.html")
 
+
 @app.route('/optimalsite', methods=['POST'])
 def optimalsite():
 
@@ -79,6 +80,40 @@ def optimalsite():
 @app.route('/optimalsite')
 def optimalsitepage():
     return render_template("optimalsite.html")
+
+@app.route('/treeheight')
+def treeheight():
+
+    return render_template("treeheight.html")
+
+
+@app.route('/treeheight', methods=['POST'])
+def treeheightmap():
+
+    if 'image1' not in request.files:
+        return 'No file part'
+    file = request.files['image1']
+    if 'image2' not in request.files:
+        return 'No file part'
+    file2 = request.files['image2']
+
+    distance = int(request.form["distance"])
+
+    filename1 = "imageUploadedLeft.jpg"
+    filename2 = "imageUploadedRight.jpg"
+
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename1))
+    file2.save(os.path.join(app.config['UPLOAD_FOLDER'], filename2))
+
+    # osite.process_image(r"D:\Projects\EDI TY SEM 2\TYEDI-2\flaskapp\static\uploads\imageUploadedsite.jpeg",height,width)
+    path = r"out"
+    height = sde.heightEstimate(distance)
+    return render_template("treeheight2.html",imageurl=path ,status= "The height of tree is ( In Feet ): " +  str(height))
+
+
+@app.route('/out')
+def out():
+    return send_file(r"D:\Projects\EDI TY SEM 2\TYEDI-2\flaskapp\out.jpg")
 
 @app.route('/home')
 def home():

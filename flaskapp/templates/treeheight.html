@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+</head>
+<body>
+    <h2>Upload an Image</h2>
+    <form action="/treeheight" method="post" enctype="multipart/form-data">
+        <label for="Right Image">Select an image:</label>
+        <input type="file" id="image1" name="image1" accept="image/*" required>
+        <br><br>
+        <label for="Left Image">Select an image:</label>
+        <input type="file" id="image2" name="image2" accept="image/*" required>
+        <br><br>
+        <input type="text" id="distance" name="distance" required placeholder="Camera To Terrain Distance">
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

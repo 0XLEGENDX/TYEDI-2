@@ -103,7 +103,7 @@ function processImage() {
       for (let i = 0; i < imageData.data.length; i += 4) {
         let gray = (imageData.data[i + 1]) * 0.587; // Keep only green channel
 
-        if (gray < meanGreen / 1.5) {
+        if (gray < meanGreen / 2) {
           gray = 0;
           blackPixelCount++;
         } else {
