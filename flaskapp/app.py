@@ -11,7 +11,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
-
 @app.route('/')
 def status():
     return 'Server is online!'
@@ -29,7 +28,7 @@ def survey():
     return render_template("survey.html")
 
 @app.route('/optimalpath', methods=['POST'])
-def optimalpath():
+def optimalpath(): 
 
 
     if 'image' not in request.files:
