@@ -4,17 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Upload</title>
+    <script>
+        function handleSubmit(event) {
+    event.preventDefault();  // Prevent the default form submission
+
+    const submitButton = document.getElementById('submitButton');
+    const waitingMessage = document.getElementById('waitingMessage');
+
+    // Disable the submit button
+    submitButton.disabled = true;
+
+    // Show the waiting message
+    waitingMessage.classList.remove('hidden');
+
+    // Submit the form
+    event.target.submit();
+}
+
+    </script>
+   <style>
+    /* Reset some default styles */
+body, h2, form, div, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container styling */
+.container {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Label styling */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Input and button styling */
+.form-group input[type="file"],
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+/* Heading styling */
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Waiting message styling */
+#waitingMessage {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+   </style>
 </head>
 <body>
-    <h2>Upload an Image</h2>
-    <form action="/optimalsite" method="post" enctype="multipart/form-data">
-        <label for="image">Select an image:</label>
-        <input type="file" id="image" name="image" accept="image/*" required>
-        <br><br>
-        <input type="text" id="height" name="height" required placeholder="Height">
-        <input type="text" id="width" name="width" required placeholder="Width">
-        <br><br>
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container">
+        <h2>Upload an Image</h2>
+        <form id="uploadForm" action="/optimalsite" method="post" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="image">Select an image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="height" name="height" required placeholder="Height">
+            </div>
+            <div class="form-group">
+                <input type="text" id="width" name="width" required placeholder="Width">
+            </div>
+            <button type="submit" id="submitButton">Submit</button>
+        </form>
+        <p id="waitingMessage" class="hidden">Waiting for results...</p>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
